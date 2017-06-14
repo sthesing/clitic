@@ -2,7 +2,7 @@
 
 declare -A array
 # Add key value pairs for programs in other languages
-# array[language]='program call'
+# array[language]='program call', relative to the directory templates
 
 array[Python]='python cli-python.py'
 array[Python3]='python3 cli-python.py'
@@ -14,7 +14,7 @@ for lang in ${!array[@]}; do
     echo $command > tmpcmd
     echo "Running test for $lang:"
     
-    bats clitic.bats
+    bats tests/clitic.bats
     
     echo ""
 done

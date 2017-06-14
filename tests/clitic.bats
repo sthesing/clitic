@@ -2,9 +2,11 @@
 
 function setup() {
   command=`cat tmpcmd`
+  cd templates
 }
 
 @test "invoking without arguments" {
+    
     run $command
     [ "$status" -eq 0 ]
     [ "$output" = "Hello World!" ]
@@ -18,7 +20,7 @@ function setup() {
 }
 
 @test "invoking with two arguments via stdin" {
-  run bash -c "grep b test-input.txt | $command"
+  run bash -c "grep b ../tests/test-input.txt | $command"
   [ "$status" -eq 0 ]
   [ "${lines[0]}" = "bar" ]
   [ "${lines[1]}" = "baz" ]
