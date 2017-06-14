@@ -15,6 +15,7 @@ The idea is to provide templates that
 - run with the `--help` or `-h` argument and begin output with 
   `usage: foo [-h] [-V] [input [input ...]]`
 - can take input from stdin, e.g. in a pipeline
+- send output to stdout without causing a broken pipe
 
 Currently, only one template is available:
 
@@ -29,8 +30,8 @@ See `clitic.bats` for details about the tests.
 
 To run the tests, run `./clitic.sh`.
 To add your own template to the test add an entry to the array in `clitic.sh`. 
-If you e.g. like to test a template written in C, add:
-`array[C]='./foo'`
+If you e.g. like to test a template written in C, save it to the `templates` 
+folder and add: `array[C]='./foo'` in `clitic.sh`.
 
 ## Pull requests welcome
 

@@ -26,6 +26,13 @@ function setup() {
   [ "${lines[1]}" = "baz" ]
 }
 
+@test "piping stdin input to stdout" {
+  run bash -c "grep b ../tests/test-input.txt | $command | cat"
+  [ "$status" -eq 0 ]
+  [ "${lines[0]}" = "bar" ]
+  [ "${lines[1]}" = "baz" ]
+}
+
 @test "invoking with --version" {
     run $command --version
     [ "$status" -eq 0 ]
@@ -49,3 +56,4 @@ function setup() {
     [ "$status"  -eq 0 ]
     [ "${lines[0]}" = "usage: foo [-h] [-V] [input [input ...]]" ]
 }
+
