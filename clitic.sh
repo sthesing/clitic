@@ -6,6 +6,7 @@ declare -A array
 
 array[Python]='python cli-python.py'
 array[Python3]='python3 cli-python.py'
+array[DocoptsPy3]='python3 cli-python-docopt.py'
 
 # Run the tests
 for lang in ${!array[@]}; do

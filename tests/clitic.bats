@@ -48,12 +48,11 @@ function setup() {
 @test "invoking with --help" {
     run $command --help
     [ "$status"  -eq 0 ]
-    [ "${lines[0]}" = "usage: foo [-h] [-V] [input [input ...]]" ]
+    [ "${lines[0]}" = "usage: foo [-h] [-V] [input [input ...]]" ] || [ "${lines[1]}" = "Usage:" ]
 }
 
 @test "invoking with -h" {
     run $command -h
     [ "$status"  -eq 0 ]
-    [ "${lines[0]}" = "usage: foo [-h] [-V] [input [input ...]]" ]
+    [ "${lines[0]}" = "usage: foo [-h] [-V] [input [input ...]]" ] || [ "${lines[1]}" = "Usage:" ]
 }
-
