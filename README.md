@@ -1,24 +1,16 @@
 # Clitic
-Templates and tests for Unix command line tools in different programming languages
+
+Clitic aims to be a collection of templates for Unix command line tools 
+written in different programming languages. A template should be a 
+starting point to write program that behaves like one would expect a 
+Unix command line tool to behave.
+
+It also provides a test suite to test just that behaviour.
 
 ## Templates
 
-Clitic aims to be a collection of templates for Unix command line tools 
-written in different programming languages.
-
-The idea is to provide templates that
-
-- run without arguments and output `Hello World`
-- run with one or several positional arguments and output them `stdout` each on 
-  a new line
-- run with the `--version` or `-V` argument and output `foo 0.1.0`
-- run with the `--help` or `-h` argument and begin output with 
-  `usage: foo [-h] [-V] [input [input ...]]`
-- can take input from stdin, e.g. in a pipelin (using the traditional "-" 
-    switch or not) 
-- send output to `stdout` without causing a broken pipe
-
-Currently, the following templates are available:
+Currently, templates for the following languages (and argument parsing suites)
+are available:
 
 - Python (using argparse)
 - Python (using docopt)
@@ -26,15 +18,29 @@ Currently, the following templates are available:
 
 ## Tests
 
-Clitic also defines tests for such templates using 
-[bats](https://github.com/sstephenson/bats).
+Roughly spoken, the tests check if the templates behave like this:
+
+- run without arguments and output `Hello World`
+- run with one or several positional arguments and output them `stdout` each on 
+  a new line
+- run with one or several positional arguments taken from stdin (using the 
+  traditional "-" switch or without using it) and output each on a new line 
+- run with the `--version` or `-V` argument and output `foo 0.1.0`
+- run with the `--help` or `-h` argument and begin output with 
+  `usage` or `Usage`
+- send output to `stdout` without causing a broken pipe
 
 See `clitic.bats` for details about the tests.
 
-To run the tests, run `./clitic.sh`.
-To add your own template to the test add an entry to the array in `clitic.sh`. 
-If you e.g. like to test a template written in C, save it to the `templates` 
-folder and add: `array[C]='./foo'` in `clitic.sh`.
+### Running the tests
+
+To run all the tests:
+`make test-all`
+
+To test a particular template, e.g. the Rust template:
+`make rust`
+
+Refer to the makefile to see the valid targets for the makefile.
 
 ## Pull requests welcome
 
@@ -47,6 +53,7 @@ sensible tests I haven't thought of.
 ### For running the tests:
 - [bash](https://www.gnu.org/software/bash/) >= 0.4.0
 - [bats](https://github.com/sstephenson/bats) = 0.4.0
+- make
 
 ### Python
 - argparse
@@ -57,4 +64,8 @@ sensible tests I haven't thought of.
 
 ## Name
 
-[Something that can't stand on its own](http://www.thefreedictionary.com/clitic).
+In linguistics, a Clitic is 
+[something that can't stand on its own](http://www.thefreedictionary.com/clitic),
+but takes it's meaning from the rest. Like the "'em" in "Beat'em up!". The
+same is true for these templates. They'll only mean something if someone uses 
+them to actually writes cli tools.
