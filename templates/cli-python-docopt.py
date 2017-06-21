@@ -1,10 +1,12 @@
 """foo
 
 Usage:
-    foo [-] | [<input>...]  
+    foo [options] [-] | [options] [<input>...]  
     foo -h | --help
     foo -V | --version
 
+Options:
+    -t, --test    Test
 """
 import sys
 from docopt import docopt
@@ -38,3 +40,6 @@ if __name__ == "__main__":
             print(a)
     else:
         print("Hello World!")
+    
+    if arguments['--test']:
+        print("Test flag set.")

@@ -20,6 +20,8 @@ if __name__ == "__main__":
         default = input_arg_default,
         help='Helpful text'
         )
+    parser.add_argument('-t', '--test', action="store_true",
+        help='Helpful text for test.')
     args = parser.parse_args()
     # If input came from a pipe, it's a TextIOWrapper,
     # that has to be iterated over. To have input from
@@ -50,3 +52,6 @@ if __name__ == "__main__":
             # they each end with a line break. We have to strip 
             # those away.
             print(item.rstrip())
+    
+    if args.test:
+        print("Test flag set.")

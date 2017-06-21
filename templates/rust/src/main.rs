@@ -10,13 +10,12 @@ const USAGE: &'static str = "
 foo
 
 Usage:
-  foo [-] | [<input>...]
+  foo [options] [-] | [options] [<input>...]
   foo (-h | --help)
   foo (-V | --version)
 
 Options:
-  -h, --help     Show this screen.
-  -V, --version     Show version.
+    -t, --test    Test
 ";
 
 fn main() {
@@ -47,6 +46,10 @@ fn main() {
         for arg in input {
             println!("{}", arg);
         }
+    }
+    
+    if args.get_bool("--test") {
+        println!("Test flag set.");
     }
 }
 
