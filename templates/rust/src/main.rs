@@ -6,13 +6,12 @@ use std::io;
 use std::io::BufRead;
 use std::process;
 
-const USAGE: &'static str = "
-foo
+const USAGE: &'static str = "foo
 
 Usage:
   foo [options] [-] | [options] [<input>...]
-  foo (-h | --help)
-  foo (-V | --version)
+  foo -h | --help
+  foo -V | --version
 
 Options:
     -t, --test    Test
@@ -24,7 +23,12 @@ fn main() {
                       .unwrap_or_else(|e| e.exit());
     //println!("{:?}", args);
     
-    if args.get_bool("-V") {
+    if args.get_bool("-h") {
+        print!("{}", USAGE);
+        process::exit(0);
+    }
+    
+    if args.get_bool("-V") || args.get_bool("--version") {
         println!("{} {}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION"));
         process::exit(0);
     }

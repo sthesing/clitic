@@ -20,6 +20,8 @@ array[Rust]='./rust/target/debug/foo'
 for lang in ${!array[@]}; do
     command=${array[$lang]}
     
+    # So bats an actually read the command, we have to put it in a temporary
+    # file tmpcmd. It's generated (and deleted) by bats' setup function
     echo $command > tmpcmd
     echo "Running test for $lang:"
     
