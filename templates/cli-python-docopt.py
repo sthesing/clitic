@@ -28,6 +28,11 @@ if __name__ == "__main__":
         for arg in read_stdin():
             arguments['<input>'].append(arg)
     
+    ################################################################
+    
+    # The rest of main is to satisfy the clitic-tests, it can be safely 
+    # removed 
+    
     if arguments['<input>']:
         for a in arguments['<input>']:
             print(a)

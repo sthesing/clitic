@@ -7,6 +7,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog='foo')
     parser.add_argument('-V', '--version', action='version', 
         version='%(prog)s '+ __version__)
+
     if sys.stdin.isatty():
         # Interactive shell 
         input_arg_default = None
@@ -24,10 +25,22 @@ if __name__ == "__main__":
     # that has to be iterated over. To have input from
     # both cases iterable, let's make a list of what
     # ever input we have and iterate over that.
+
+    input = []
+    if args.input == ['-']: # traditional stdin switch
+        args.input = []     # we don't want it any longer
+        for line in sys.stdin:
+            input.append(line.rstrip())
+    
     if not input_arg_default:
-        input = args.input
+        input += args.input
     else:
-        input = list(args.input)
+        input += list(args.input)
+    
+    ################################################################
+    
+    # The rest of main is to satisfy the clitic-tests, it can be safely 
+    # removed   
     
     if not input:
         print("Hello World!")

@@ -14,12 +14,15 @@ The idea is to provide templates that
 - run with the `--version` or `-V` argument and output `foo 0.1.0`
 - run with the `--help` or `-h` argument and begin output with 
   `usage: foo [-h] [-V] [input [input ...]]`
-- can take input from stdin, e.g. in a pipeline
-- send output to stdout without causing a broken pipe
+- can take input from stdin, e.g. in a pipelin (using the traditional "-" 
+    switch or not) 
+- send output to `stdout` without causing a broken pipe
 
-Currently, only one template is available:
+Currently, the following templates are available:
 
-- Python
+- Python (using argparse)
+- Python (using docopt)
+- Rust (using docopt)
 
 ## Tests
 
@@ -47,6 +50,10 @@ sensible tests I haven't thought of.
 
 ### Python
 - argparse
+- docopt
+
+### Rust
+- cargo
 
 ## Name
 
