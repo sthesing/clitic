@@ -1,6 +1,7 @@
 extern crate docopt;
-extern crate libc;
+extern crate atty;
 
+use atty::Stream;
 use docopt::Docopt;
 use std::io;
 use std::io::BufRead;
@@ -64,8 +65,7 @@ fn main() {
 fn assemble_input_vector(args: &docopt::ArgvMap) -> Vec<String> {
     let mut input = Vec::new();
     // do we get input from stdin?
-    let no_tty = unsafe { libc::isatty(libc::STDIN_FILENO as i32) } == 0;
-    if args.get_bool("-") || no_tty {
+    if args.get_bool("-") || atty::isnt(Stream::Stdin) {
         input = read_stdin();
     } else {
     // construct a vector containin proper strings from args.get_vec("<input>")
