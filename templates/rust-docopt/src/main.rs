@@ -7,6 +7,37 @@ use std::io;
 use std::io::BufRead;
 use std::process;
 
+// ##################################
+// #       Helper functions         #
+// ##################################
+
+fn assemble_input_vector(args: &docopt::ArgvMap) -> Vec<String> {
+    let mut input = Vec::new();
+    // do we get input from stdin?
+    if args.get_bool("-") || atty::isnt(Stream::Stdin) {
+        input = read_stdin();
+    } else {
+    // construct a vector containin proper strings from args.get_vec("<input>")
+        for arg in args.get_vec("<input>") {
+            input.push(arg.to_string());
+        }
+    }
+    input
+}
+
+fn read_stdin() -> Vec<String> {
+    let mut input = Vec::new();
+    let stdin = io::stdin();
+    for line in stdin.lock().lines() {
+        input.push(line.unwrap());
+    }
+    input
+}
+
+// ##################################
+// #         Program Logic          #
+// ##################################
+
 const USAGE: &'static str = "foo
 
 Usage:
@@ -22,7 +53,6 @@ fn main() {
     let args = Docopt::new(USAGE)
                       .and_then(|dopt| dopt.parse())
                       .unwrap_or_else(|e| e.exit());
-    //println!("{:?}", args);
     
     if args.get_bool("-h") {
         print!("{}", USAGE);
@@ -58,29 +88,3 @@ fn main() {
     }
 }
 
-// ##################################
-// #       Helper functions         #
-// ##################################
-
-fn assemble_input_vector(args: &docopt::ArgvMap) -> Vec<String> {
-    let mut input = Vec::new();
-    // do we get input from stdin?
-    if args.get_bool("-") || atty::isnt(Stream::Stdin) {
-        input = read_stdin();
-    } else {
-    // construct a vector containin proper strings from args.get_vec("<input>")
-        for arg in args.get_vec("<input>") {
-            input.push(arg.to_string());
-        }
-    }
-    input
-}
-
-fn read_stdin() -> Vec<String> {
-    let mut input = Vec::new();
-    let stdin = io::stdin();
-    for line in stdin.lock().lines() {
-        input.push(line.unwrap());
-    }
-    input
-}

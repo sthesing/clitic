@@ -1,6 +1,6 @@
 .PHONY: python python3 python-docopts rust test clean
 
-test-all: python python3 python-docopts rust
+test-all: python python3 python-docopts rust-docopt rust-clap
 
 python: export cmd = "python cli-python.py"
 python: export template = "Python with argparse"
@@ -17,13 +17,22 @@ python-docopts: export template = "Python3 with docopt"
 python-docopts:
 	@$(MAKE) --no-print-directory test 
 
-rust: export cmd = "./rust/target/debug/foo"
-rust: export template = "Rust with docopt"
-rust:
+rust-docopt: export cmd = "./rust-docopt/target/debug/foo"
+rust-docopt: export template = "Rust with docopt"
+rust-docopt:
 	# Build binary of Rust template
-	@$(MAKE) -C templates/rust build
+	@$(MAKE) -C templates/rust-docopt build
 	@echo ""
 	@$(MAKE) --no-print-directory test 
+
+
+rust-clap: export cmd = "./rust-clap/target/debug/foo"
+rust-clap: export template = "Rust with clap"
+rust-clap:
+	# Build binary of Rust template
+	@$(MAKE) -C templates/rust-clap build
+	@echo ""
+	@$(MAKE) --no-print-directory test
 
 test:
 	@echo $(cmd) > tmpcmd

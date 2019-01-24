@@ -1,0 +1,8 @@
+[package]
+name = "foo"
+version = "0.1.0"
+authors = ["Stefan Thesing <software@webdings.de>"]
+
+[dependencies]
+clap = "2.32.0"
+atty = "0.2.11"

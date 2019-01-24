@@ -131,11 +131,11 @@ function setup() {
 @test "with --help" {
     run $command --help
     [ "$status"  -eq 0 ]
-    [[ "${lines[0]}" =~ ^usage ]] || [[ "${lines[1]}" =~ ^Usage ]]
+    [[ "${lines[0]}" =~ ^usage ]] || [[ "${lines[1]}" =~ ^Usage ]] || [[ "${lines[1]}" =~ ^USAGE ]]
 }
 
 @test "with -h" {
     run $command -h
     [ "$status"  -eq 0 ]
-    [[ "${lines[0]}" =~ ^usage ]] || [[ "${lines[1]}" =~ ^Usage ]]
+    [[ "${lines[0]}" =~ ^usage ]] || [[ "${lines[1]}" =~ ^Usage ]] || [[ "${lines[1]}" =~ ^USAGE ]]
 }
